@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Landing from "./pages/landing"
-// import Investigation from "./pages/investigation"
+import Investigation from "./pages/investigation"
 import './index.css'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
-        {/* <Route path="/investigation" element={<Investigation />} /> */}
+        <Route path="/main" element={<Investigation />} />
       </Routes>
     </BrowserRouter>
     </>
