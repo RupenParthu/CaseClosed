@@ -2,6 +2,10 @@ import { useNavigate } from "react-router-dom"
 import background1 from '../assets/bg-1.jpeg'
 import conan1 from '../assets/conan-1.png'
 import logo from '../assets/logo.png'
+import start from '../assets/startbtn.png'
+import welcome from '../assets/welcome.png'
+import '../index.css'
+
 export default function Landing() {
   const navigate = useNavigate()
   return (
@@ -13,10 +17,10 @@ export default function Landing() {
     {/* main details*/}
     <div className="flex w-full min-h-screen overflow-hidden">
       {/* Left half*/}
-      <div className="flex-1 flex flex-col justify-center items-center text-white">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-center mb-6">Hello Detective</h1>
-        <button onClick={() => navigate("/main")} className="px-8 py-4 text-xl font-bold rounded-full bg-red-600 hover:bg-red-800 transition duration-300 transform hover:scale-105 shadow-lg">
-          Start
+      <div className="flex-1 flex flex-col justify-center items-center text-white translate-y-8">
+        <div className="translate-y-8"><img src={welcome} alt="welcome detective" className="max-w-lg w-full scale-130" /></div>
+        <button onClick={() => navigate("/main")} className="px-8 scale-75 transition duration-300 transform hover:scale-80">
+          <img src={start}/>
         </button>
       </div>
 
@@ -37,6 +41,9 @@ export default function Landing() {
        className="absolute top-4 left-4 w-20 sm:w-28 md:w-40 lg:w-64 h-auto z-50"
      />
     </div>
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2">
+  <p className="text-white text-2xl">- Made by Rupen -</p>
+</div>
     </>
     
   )
