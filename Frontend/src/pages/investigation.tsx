@@ -4,7 +4,6 @@ import mainbg from "../assets/main-bg.jpg";
 import conan2 from "../assets/conan-2.png";
 import '../index.css'
 
-const GEMINI_API_KEY: string = "Add your api key here"; 
 interface Message {
   sender: "user" | "detective";
   text: string;
@@ -71,8 +70,8 @@ const Investigation: React.FC = () => {
 
   const callAPI = async (prompt: string, expectsJson = false): Promise<void> => {
     setIsLoading(true);
-
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+    const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
     
     try {
         const response = await fetch(API_URL, {
@@ -195,7 +194,7 @@ const Investigation: React.FC = () => {
         <div className="w-[13.5%]"></div>
 
         {/* Chatbox */}
-        <div className="w-[80%] flex items-center justify-center relative w-screen h-screen overflow-hidden">
+        <div className="w-[80%] flex items-center justify-center relative h-screen overflow-hidden">
           <div className="bg-[black]/70 text-white p-5 w-[90%] h-[85%] overflow-y-auto rounded-lg">
             <div className="h-[85%] overflow-y-auto pr-2">
               {messages.map((msg, i) => (
@@ -239,24 +238,23 @@ const Investigation: React.FC = () => {
           </div>
         </div>
 
-      <div className="w-[40%] flex flex-col gap-3 pt-12 h-full pr-8">
-
+      <div className="w-[40%] flex flex-col gap-3 pt-12 h-full pr-8 overflow-hidden">
   {/* Suspects Section */}
-  <div className="relative px-4 py-3 w-full flex-1 flex flex-col bg-black/30 rounded-xl">
+  <div className="relative px-4 py-6 w-full flex-1 flex flex-col bg-black/50 rounded-xl mb-4 overflow-hidden">
     <h3 className="text-white text-2xl font-semibold text-center">Suspects</h3>
     <div className="w-30 h-[2px] bg-white mx-auto mb-4 rounded-full"></div>
+    {/* Scroll only inside this */}
     <div className="flex-1 flex flex-col gap-4 overflow-y-auto pr-2">
       {suspects.length > 0 ? (
         suspects.map((s, i) => (
           <div
             key={i}
-            className="bg-black/30 border border-gray-800 hover:bg-gray-900/50 p-4 rounded-xl shadow-md transition-all duration-200 text-white w-full cursor-pointer group"
+            className="bg-black/30 border border-gray-800 hover:bg-gray-900/70 p-4 rounded-xl shadow-md transition-all duration-200 text-white w-full cursor-pointer group"
           >
             {/* Default (name only) */}
             <div className="group-hover:hidden">
               <h4 className="text-xl font-bold">🔎 {s.name}</h4>
             </div>
-
             {/* Hovered (details) */}
             <div className="hidden group-hover:block">
               <p><span className="font-bold">Age:</span> {s.age}</p>
@@ -272,21 +270,21 @@ const Investigation: React.FC = () => {
   </div>
 
   {/* Evidence Section */}
-  <div className="relative px-4 py-6 w-full flex-1 flex flex-col bg-black/30 rounded-xl mb-4">
+  <div className="relative px-4 py-6 w-full flex-1 flex flex-col bg-black/50 rounded-xl mb-4 overflow-hidden">
     <h3 className="text-white text-2xl font-semibold text-center">Evidence</h3>
     <div className="w-30 h-[2px] bg-white mx-auto mb-4 rounded-full"></div>
+    {/* Scroll only inside this */}
     <div className="flex-1 flex flex-col gap-4 overflow-y-auto pr-2">
       {evidence.length > 0 ? (
         evidence.map((e, i) => (
           <div
             key={i}
-            className="bg-black/30 border border-gray-800 hover:bg-gray-900/50 p-4 rounded-xl shadow-md transition-all duration-200 text-white w-full cursor-pointer group"
+            className="bg-black/30 border border-gray-800 hover:bg-gray-900/70 p-4 rounded-xl shadow-md transition-all duration-200 text-white w-full cursor-pointer group"
           >
             {/* Default (name only) */}
             <div className="group-hover:hidden">
               <h4 className="text-xl font-bold">📄 {e.name}</h4>
             </div>
-
             {/* Hovered (details) */}
             <div className="hidden group-hover:block">
               <p className="italic">{e.description}</p>
@@ -305,8 +303,7 @@ const Investigation: React.FC = () => {
     </div>
   </div>
 </div>
-
-        </div>
+</div>
 
       {/* Logo
       <div>
